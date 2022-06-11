@@ -5,20 +5,27 @@ const initialState = {
   me: {},
 };
 
+//액션 정의
 const LOGIN = "LOGIN";
 
-export const login = createAsyncThunk(LOGIN, async (user, thunkAPI) => {
-  const { users } = thunkAPI.getState().users;
-  const isLogin = await loginApi(users, user);
+//액션 함수
+export const login = createAsyncThunk(LOGIN, async (user) => {
+  console.log(user);
+  const isLogin = await loginApi(user);
   return isLogin;
 });
 
+//리듀서
 export const usersSlice = createSlice({
-  name: "users",
+  name: "users", //루트 리듀서에 정의한 이름
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, { payload }) => {
+      //payload에는 액션의 정보들이 담겨져 있다
+      //따라서 액션 함수에서 return되는 isLogin 값과 loginApi에서 반환한 user값 또한 가지고 있다.
+      console.log(payload);
+      console.log(state);
       if (payload.isLogin) {
         localStorage.setItem("token", payload.user.token);
         return {
