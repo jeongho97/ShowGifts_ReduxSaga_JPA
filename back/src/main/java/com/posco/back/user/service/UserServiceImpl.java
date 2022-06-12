@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findUser() {
         return userMapper.getUser();
     }
+
+    @Override
+    public UserDto serviceLogin(UserDto userDto) {
+        return userMapper.getUserByUserIdAndPassword(userDto);
+    }
 }

@@ -14,3 +14,7 @@ spring:
 
 mybatis:
   config-location: classpath:config/myBatis.xml
+
+jwt:
+  secret_key: SECRET_APPLESECRET_APPLESECRET_APPLESECRET_APPLE
+  expTime: 86400000

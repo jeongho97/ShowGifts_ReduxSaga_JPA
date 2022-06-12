@@ -8,4 +8,12 @@
         FROM
             users
     </select>
+    <select id="getUserByUserIdAndPassword" resultType="UserDto">
+        SELECT
+        id, userId, name, img, pcnt
+        FROM
+        users
+        WHERE
+        userId = #{userId} and password = #{password}
+    </select>
 </mapper>
