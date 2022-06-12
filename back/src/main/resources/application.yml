@@ -1,0 +1,16 @@
+server:
+  port : 8000
+spring:
+  devtools:
+    livereload:
+      enabled : true
+  datasource:
+    url : jdbc:mysql://localhost:3306/rollingpaper?serverTimezone=UTC&characterEncoding=UTF-8
+    username : root
+    password : 1234
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+mybatis:
+  config-location: classpath:config/myBatis.xml
