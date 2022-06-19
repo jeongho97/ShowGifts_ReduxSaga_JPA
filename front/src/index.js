@@ -1,22 +1,28 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import store from "./store/store";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-//index.js에 store.js에 정의한 루트 리듀서를 불러와서 이를 통해 새로운 스토어를 만들고 Provider를 사용하여 프로젝트에 리덕스를 적용한다
+import { createRoot } from "react-dom/client";
+import gifts from "./reducers/gifts";
+import { applyMiddleware, createStore } from "redux";
+import rootSaga from "./sagas";
+import createSagaMiddleware from "redux-saga";
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(gifts, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
+
+const container = document.getElementById("root");
+const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
+reportWebVitals();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
